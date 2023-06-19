@@ -1,0 +1,172 @@
+---
+title: "Identifying the Hetergeneous Impact of Highly Anticipated Events: Evidence From the Tax Cuts and Jobs Act"
+author: "Andrew C. Baker"
+institute: "University of California, Berkeley School of Law"
+date: "WFA <br> June 27, 2023"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      ratio: '16:9'
+      highlightLines: true
+      countIncrementalSlides: false
+      extra_dependencies: ["xcolor"]
+---
+
+# .center.pull[Overview]
+
+- Novel way to conduct cross-sectional event studies.
+
+    - Huge literature using event studies, surveys suggest 1000s of studies.
+    
+- Paper proposes a method that allows for:
+
+    1. Anticipation
+    
+    2. Estimation of Heterogeneous Treatment Effects
+    
+- Application focuses on TCJA:
+
+  - 95% chance 30 days before the event.
+  
+  - Inclusive of anticipation - 12.36% vs 0.68% effect size.
+  
+  - Heterogeneity in effects in explainable and interesting ways.
+
+
+---
+
+# .center.pull[Key Methodological Innovation]
+
+- Use option prices to get more equations for estimating moment equations.
+
+- This allows you to estimate contingent firm-specific value effects and state-contingent volatility. Can use these estimated values to back out counterfactual prices. 
+
+- Instead of using sign restrictions for identification (Borochin 2014), get around label switching by creating a novel method to determine if firm more likely to be a winner or loser each day in pre-estimation period.
+
+    - Classify firm as winner if >= half days are classified as winner.
+    
+--
+    
+- **What does this distribution look like across firms?**
+
+- **How does $s_i$ vary by $\overline{q_t}$?**
+
+- **What happens to the estimated average effect if you prune some measure of the center of the distribution?**
+
+---
+
+# .center.pull[$$\overline{q_{(i)t}}$$]
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
+library(tidyverse)
+
+set.seed(20230619)
+dt <- bind_rows(
+  tibble(
+    type = "Good",
+    prob = c(rnorm(5000, mean = 0.15, sd = 0.10),
+             rnorm(5000, mean = 0.85, sd = 0.10))
+  ),
+  tibble(
+    type = "Bad",
+    prob = c(rnorm(10000, mean = 0.5, sd = 0.15))
+  )
+)
+
+dt %>% 
+  ggplot(aes(x = prob, group = type, fill = type)) + 
+  geom_density(alpha = 0.75) + 
+  theme_bw() + 
+  scale_fill_manual(values = c("#A7473A", "#4B5F6C")) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1),
+                     limits = c(0, 1),
+                     labels = scales::percent) + 
+  scale_y_continuous(limits = c(0, 3)) + 
+  labs(x = "Probablity", y = "") + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 14),
+        axis.title.x = element_text(size = 18))
+
+```
+
+---
+# .center.pull[$$\overline{q_{(i)t}}$$]
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
+
+dt %>% 
+  filter(!(prob %>% between(.4, .6) & type == "Bad")) %>% 
+  ggplot(aes(x = prob, group = type, fill = type)) + 
+  geom_density(alpha = 0.75) + 
+  theme_bw() + 
+  scale_fill_manual(values = c("#A7473A", "#4B5F6C")) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.1),
+                     limits = c(0, 1),
+                     labels = scales::percent) + 
+  scale_y_continuous(limits = c(0, 3)) + 
+  labs(x = "Probablity", y = "") + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 14),
+        axis.title.x = element_text(size = 18))
+
+```
+
+---
+
+# .center.pull[$$\overline{q_{(i)t}}$$]
+
+- Additional thoughts on the $q_{it}$:
+
+    - In cases where there *are* prediction market values, could they be used in the model?
+    
+    - Is it necessary to classify a firm as a static winner/loser? What if it changes?
+    
+    - Does it matter for anything besides rhetoric that we can classify $q$ as a physical property?
+    
+
+---
+
+# .center.pull[Use of Options Prices]
+
+- Key move in this series of papers now is to use both equity and option prices to measure effects.
+
+- This is clearly very good! 
+
+- But can we do more?
+
+  - Seems to me that we're just using more price series to tie down more parameters (assuming model is correct).
+  
+  - What about using varying maturity dates rather than holding $\tau$ constant?
+  
+- Optimal $\mathcal{J}$ trades off additional signal from overidentification against noise from less liquid options.
+
+  - Would be great to do more work here to optimize this tradeoff.
+  
+---
+
+# .center.pull[Other Design Choices]
+
+- 100 firms with most liquid options.
+
+- No non-zero open interest day in pre-period.
+
+- J = 6.
+
+- TCJA introduction in Congress as starting date.
+
+    - ** Can you use stationary q beforehand as placebo style test? **
+
+--
+
+- ** All seem sensible to me, but in keeping with theme of robustness in structural analysis can you: **
+
+    - **Show sensitivity of $\widehat{S_{i, u} / S_{i, d}} - 1$ to small changes in M, J, starting date.**
+    
+    - **Think of ways to optimally select these values for broader pick up.** 
+  
