@@ -6,6 +6,7 @@ date: "WFA <br> June 27, 2023"
 output:
   xaringan::moon_reader:
     lib_dir: libs
+    css: ['default', 'metropolis', 'metropolis-fonts', 'extracss.css']
     nature:
       highlightStyle: github
       ratio: '16:9'
@@ -57,7 +58,7 @@ output:
 
 ---
 
-# .center.pull[$$\overline{q_{(i)t}}$$]
+# .center.pull[Probability of Passage]
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
 library(tidyverse)
@@ -94,7 +95,7 @@ dt %>%
 ```
 
 ---
-# .center.pull[$$\overline{q_{(i)t}}$$]
+# .center.pull[Probability of Passage]
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
 
@@ -119,7 +120,7 @@ dt %>%
 
 ---
 
-# .center.pull[$$\overline{q_{(i)t}}$$]
+# .center.pull[Probability of Passage]
 
 - Additional thoughts on the $q_{it}$:
 
