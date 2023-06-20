@@ -60,7 +60,18 @@ output:
 
 # .center.pull[Probability of Passage]
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  fig.asp = 9/16,
+  fig.align = 'center',
+  echo = F,
+  out.width = "90%",
+  dpi= 500
+)
+
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 6}
 library(tidyverse)
 
 set.seed(20230619)
