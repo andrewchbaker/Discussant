@@ -96,7 +96,7 @@ dt %>%
                      limits = c(0, 1),
                      labels = scales::percent) + 
   scale_y_continuous(limits = c(0, 3)) + 
-  labs(x = "Probablity", y = "") + 
+  labs(x = "Probability", y = "") + 
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.text.y = element_blank(),
@@ -120,7 +120,7 @@ dt %>%
                      limits = c(0, 1),
                      labels = scales::percent) + 
   scale_y_continuous(limits = c(0, 3)) + 
-  labs(x = "Probablity", y = "") + 
+  labs(x = "Probability", y = "") + 
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.text.y = element_blank(),
