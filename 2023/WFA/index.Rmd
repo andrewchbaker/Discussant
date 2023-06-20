@@ -170,3 +170,42 @@ dt %>%
     
     - **Think of ways to optimally select these values for broader pick up.** 
   
+---
+
+# .center.pull[Tests of TCJA]
+
+- Makes sense what was done given low N data points.
+
+- But...
+
+--
+
+- **Use PCA or other method to get a lower dimensional set of latent factors in addition / in place of lasso approach.**
+
+- **Consider heat-mapping.**
+
+---
+
+# .center.pull[Heat Map]
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align='center', fig.width = 12, fig.height = 7}
+dt <- tibble(
+  cash_etr = sample(1:5, 1000, replace = TRUE),
+  rd_intensity = sample(1:5, 1000, replace = TRUE)) %>% 
+  rowwise() %>% 
+  mutate(impact = (rnorm(1, cash_etr, 1) + rnorm(1, rd_intensity, 1) + rnorm(1, cash_etr * rd_intensity, 1))/100)
+
+dt %>% 
+  group_by(cash_etr, rd_intensity) %>% 
+  summarize(impact = mean(impact)) %>% 
+  ggplot(aes(x = cash_etr, y = rd_intensity, fill = impact)) +
+  geom_tile() + 
+  scale_fill_viridis_c() %>% 
+  labs(x = "Cash ETR", y = "R&D \n Intensity", fill = "Estimated Impact") + 
+  theme_bw() + 
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.5, angle = 360),
+        legend.position = 'bottom')
+
+```
+
+
