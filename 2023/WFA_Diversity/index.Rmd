@@ -42,18 +42,6 @@ output:
   
 ---
 
-# .center.pull[Motivation: Diversity "Policies" and "Targets"]
-
-- Disconnect between share of firms with policies and those with actual concrete targets.
-  - What do we draw from this?
-  
-```{r, echo = FALSE, fig.align='center', out.width = '75%'}
-knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "policy_v_target.png"),
-                        dpi = 500)
-```
-
----
-
 # .center.pull[Motivation: Legal and Regulatory Action]
 
 - SEC very interested in standardizing ESG disclosures.
@@ -77,16 +65,17 @@ knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "diversi
   - Little to no regulation or standardization.
   - Impossible or costly verification.
   
-    - **Potential benefits to diversity washing:**
+
+- **What are the incentives to exaggerate commitment to diversity?**
+
+    - Potential benefits to diversity washing:
     
       - Enhanced reputation among stakeholders.
-      
       - Capital flow with rise of ESG investing.
       
-    - **Potential Costs:**
+    - Potential Costs:
     
       - Litigation (has historically been very rare).
-      
       - Diversity audits (only 8 proposals passed in 2022.)
 
 ---
@@ -158,13 +147,11 @@ knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "diversi
   
   - **SEC currently has proposals for ESG disclosures under review**.
   
-  - **Representative** of external stance on DEI.
-  
 ---
 
 # .center.pull[Dictionary Based Approach]
 
-- Build upon dictionary-based approaches commonly used in finance.
+- Build upon dictionary-based approaches commonly used in accounting and finance.
 
 - **Steps:**
 
