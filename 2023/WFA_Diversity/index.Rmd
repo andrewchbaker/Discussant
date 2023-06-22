@@ -1,0 +1,384 @@
+---
+title: "Diversity Washing"
+author: "**Andrew C. Baker**, David F. Larcker, Charles G. McClure, Durgesh Saraph, and Edward M. Watts"
+institute: "<br> **University of California, Berkeley School of Law**"
+date: "<br> WFA <br> June 26, 2023"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ['default', 'metropolis', 'metropolis-fonts', 'extracss.css']
+    nature:
+      highlightStyle: github
+      ratio: '16:9'
+      font-size: 15
+      highlightLines: true
+      countIncrementalSlides: false
+      extra_dependencies: ["xcolor"]
+---
+<style>
+.remark-slide-content.hljs-default {
+  border-top: 40px solid #23373B;
+}
+
+.remark-slide-content {
+  font-size: 25px;
+}
+
+</style>
+
+# .center.pull[Research Question]
+
+<br>
+
+**Do firms truthfully disclose their commitments to Diversity, Equity, and Inclusion (DEI) in their financial statements?**
+
+- Are there market implications for talking more about diversity than is reflected in underlying actions?
+
+- We focus on diversity in this paper given:
+
+  - Prior literature.
+  - Recent investor attention and public commentary.
+  - Data availability.
+  
+---
+
+# .center.pull[Motivation: Diversity "Policies" and "Targets"]
+
+- Disconnect between share of firms with policies and those with actual concrete targets.
+  - What do we draw from this?
+  
+```{r, echo = FALSE, fig.align='center', out.width = '75%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "policy_v_target.png"),
+                        dpi = 500)
+```
+
+---
+
+# .center.pull[Motivation: Legal and Regulatory Action]
+
+- SEC very interested in standardizing ESG disclosures.
+
+- Around 40 lawsuits filed since 2020 related to diversity washing.
+
+- Many of these suits have centered on public commitments in financial documents.
+
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "diversity_headlines.png"),
+                        dpi = 200)
+```
+
+---
+
+# .center.pull[Diversity Washing]
+
+- **DEI disclosures are relatively new.**
+
+  - Little to no regulation or standardization.
+  - Impossible or costly verification.
+  
+    - **Potential benefits to diversity washing:**
+    
+      - Enhanced reputation among stakeholders.
+      
+      - Capital flow with rise of ESG investing.
+      
+    - **Potential Costs:**
+    
+      - Litigation (has historically been very rare).
+      
+      - Diversity audits (only 8 proposals passed in 2022.)
+
+---
+
+# .center.pull[Our Contribution]
+
+<br>
+** We construct measures of underlying firm-level diversity, which we can compare with discussion of diversity in financial disclosures.**
+
+- **Advantages of our approach**:
+
+  - Allows us to peak "under the hood" at a non-self-disclosed measure of actual diversity.
+  - Breadth: we can measure diversity along cross-section and time-series.
+  
+- **Real-world relevance**:
+
+  - Firms have been accused of diversity washing, but evidence so far consists of anecdotes.
+  - Can provide evidence on the implications of diversity washing for firms and fund flow.
+  
+---
+
+# .center.pull[Data]
+
+<br>
+
+- Sample: **All Firms in Compustat-CRSP File** from **2008 to 2021**.
+
+- Variety of data sources:
+
+  - **Revelio Labs**: Firm-year level diversity measures.
+  
+  - **EDGAR Filings (WRDS SEC Analytics Suits):** Raw text of 10Ks, DEF 14As, 8Ks.
+  
+  - Additional Data Sources: Compustat, CRSP (securities prices and mutual fund holdings), Sustainalytics, Thompson Reuters (13-F holdings and Refinitiv), Goodjobsfirst, Twitter, Corporate Register.
+
+---
+
+# .center.pull[Revelio Labs: Diversity Data]
+
+- Aggregates measures of firm diversity at firm-year level.
+
+    - Compiles data from hundreds of millions of online public profiles and resumes.
+    
+    - Prediction-based algorithm to assign gender and race/ethnicity from name and location.
+    
+        - Trained on Census and voter registration data. 
+        
+- Caveats:
+
+  - Data is imperfect. But
+      - Firm has done analyses to validate its accuracy. 
+      - Sample may be biased towards professionals. 
+      
+  - 90% correlation for females when compared to sample of disclosing firms (Liang et al. 2022, WP)
+  
+---
+
+# .center.pull[DEI Related Disclosures]
+
+- Difficult to observe all possible disclosure channels.
+
+- Focus on EDGAR documents:
+
+  - **Coverage:** All publicly traded firms have to file.
+  
+  - **Increasingly essential avenue** for firm communication about ESG-related activities and commitments.
+  
+  - **Firms have recently come under scrutiny for false or misleading commitments** to diversity in their financial disclosures.
+  
+  - **SEC currently has proposals for ESG disclosures under review**.
+  
+  - **Representative** of external stance on DEI.
+  
+---
+
+# .center.pull[Dictionary Based Approach]
+
+- Build upon dictionary-based approaches commonly used in finance.
+
+- **Steps:**
+
+  - Assemble a dictionary of key DEI-related words from online DEI dictionaries.
+      - e.g. "Equal Pay", "Affirmative Action", "Sexual Orientation"
+      
+  - Remove terms that have alternative meanings in financial documents (e.g., equity)
+      - replace with bigrams where possible (e.g. "pay equity")
+      
+  - Count DEI terms across SEC filings.
+  
+- **Summary:** Measure the extent of DEI discussions in financial statements. 
+
+---
+
+# .center.pull[How Do Firms Talk about DEI (in progress)]
+
+<br>
+
+- Extract the sentences with DEI words.
+
+- Use `word2vec` and `kmeans` to identify topics.
+
+- Have RAs label topics and classify them into categories:
+
+    - Community engagement, governance, employee characteristics, legal concerns, etc.
+    
+- Measure the tone of the sentences with DEI words and correlate it with our washing measure. 
+    
+---
+
+# .center.pull[Underlying Diversity vs. DEI Discussions]
+
+```{r, echo = FALSE, fig.align='center'}
+
+magick::image_read_pdf(here::here("2023/WFA_Diversity/figures", "dei_diversity_time_series.pdf"),
+                       pages = 1)
+```
+---
+ 
+# .center.pull[DEI Disclosures and Diversity]
+    
+- We document a **positive but weak** relationship in aggregate between DEI disclosures and underlying diversity.
+    - Consistent with prior work.
+    - Results slightly stronger without FEs, but remain economically very small 
+    - Incremental $R^2$ only on order of 0.1-0.7%.
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "dei_diversity_reg.png"),
+                        dpi = 300)
+```  
+
+---
+ 
+# .center.pull[DEI Disclosures and Diversity]
+
+```{r, echo = FALSE, fig.align='center', out.width = '70%'}
+magick::image_read_pdf(here::here("2023/WFA_Diversity/figures", "boxplots.pdf"),
+                       pages = 1)
+```  
+
+---
+ 
+# .center.pull[Empirical Measure of Diversity Washing]
+<br> 
+<div align="center">
+ 1) **Diversity Washing Level** = $\eta_{DEI}$ - $\eta_{Diversity}$
+ 
+ 2) **Diversity Washers** = $\mathbb{1}(\eta_{DEI} > \eta_{Diversity})$
+ 
+<div align="left">
+
+<br> 
+- Disparity between DEI word count and underlying diversity.
+
+    - Assumption being that these measures should be correlated.
+    
+- Similar rationale to prior studies using **abnormal textual measures** (e.g. Teoh et al. 2014, Bushee et al. 2017)
+
+
+---
+
+# .center.pull[Descriptive Analysis]
+
+<div align="center">
+ 1) **Diversity Washing Level** = $\eta_{DEI}$ - $\eta_{Diversity}$
+ 
+ 2) **Diversity Washers** = $\mathbb{1}(\eta_{DEI} > \eta_{Diversity})$
+ 
+<div align="left">
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "descriptives.png"),
+                        dpi = 300)
+```  
+
+---
+
+# .center.pull[Descriptive Analysis]
+<div align="center">
+
+**Diversity Washers are conditionally larger**
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "descriptives_size.png"),
+                        dpi = 300)
+```  
+
+---
+# .center.pull[Descriptive Analysis]
+<div align="center">
+
+**Diversity Washers are conditionally less profitable and have lower growth**
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "descriptives_growth.png"),
+                        dpi = 300)
+``` 
+
+---
+# .center.pull[Descriptive Analysis]
+<div align="center">
+
+**Diversity Washers have conditionally lower returns and higher volatility**
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "descriptives_returns.png"),
+                        dpi = 300)
+``` 
+
+---
+# .center.pull[Diversity Washing and Employment Violations]
+<div align="center">
+
+**Diversity Washers have more employment and discrimination-related penalties (number and dollar amount)**
+
+```{r, echo = FALSE, fig.align='center', out.width = '62%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "penalties.png"),
+                        dpi = 800)
+```
+
+---
+# .center.pull[Diversity Washing and Questionable ESG Policies]
+<div align="center">
+
+**Diversity Washers have more *questionable ESG policies***:
+  
+  **Lack quantifiable targets**
+  
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "questionable_policy.png"),
+                        dpi = 800)
+```
+
+---
+# .center.pull[Diversity Washing and ESG Ratings]
+
+- ESG rating agencies rely heavily on firm disclosures.
+
+    - "... a default value of 0 is assigned... when no relevant data is found in the public disclosure of companies." - Refinitiv Methodology guide.
+    
+- Diversity washers have *2-13% higher ESG ratings* than other firms. 
+
+```{r, echo = FALSE, fig.align='center', out.width = '80%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "esg_ratings.png"),
+                        dpi = 800)
+```
+
+---
+# .center.pull[Diversity Washing and ESG Ownership]
+
+- Firms might use opportunistic DEI disclosures to attract investors.
+
+    - Socially-responsible capital could be misallocated as a result.
+    
+    - The SEC is very concerned with this question.
+    
+- Diversity washers have approximately *10% Higher ESG fund ownership* than could be expected. 
+
+```{r, echo = FALSE, fig.align='center', out.width = '65%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "ownership.png"),
+                        dpi = 800)
+```
+
+---
+# .center.pull[Diversity Washing as an Aspiration]
+
+- Could DEI disclsoure channel signal aspiration to become more diverse?
+
+  - **No evidence of future increases in diversity hiring**.
+  - **Similar results focusing on senior employees**.
+
+
+```{r, echo = FALSE, fig.align='center', out.width = '75%'}
+knitr::include_graphics(path = here::here("2023/WFA_Diversity/figures", "future_growth.png"),
+                        dpi = 800)
+```
+
+
+---
+# .center.pull[Conclusion]
+
+<br> 
+
+- We provide large-sample evidence consistent with:
+
+    - Weak correlation between discussion of DEI and actual underlying diversity.
+    
+    - Aggregate correlation masks large underlying disparity between disclosed commitments to DEI and hiring practices.
+    
+    - This disparity is correlated with ESG ratings and fund flows, similar to worries about misallocated capital with unverifiable disclosures.
+  
+
+
+
+
+

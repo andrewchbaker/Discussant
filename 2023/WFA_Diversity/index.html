@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Diversity Washing</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andrew C. Baker, David F. Larcker, Charles G. McClure, Durgesh Saraph, and Edward M. Watts" />
+    <script src="libs/header-attrs-2.22/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="extracss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Diversity Washing
+]
+.author[
+### <strong>Andrew C. Baker</strong>, David F. Larcker, Charles G. McClure, Durgesh Saraph, and Edward M. Watts
+]
+.institute[
+### <br> <strong>University of California, Berkeley School of Law</strong>
+]
+.date[
+### <br> WFA <br> June 26, 2023
+]
+
+---
+
+&lt;style&gt;
+.remark-slide-content.hljs-default {
+  border-top: 40px solid #23373B;
+}
+
+.remark-slide-content {
+  font-size: 25px;
+}
+
+&lt;/style&gt;
+
+# .center.pull[Research Question]
+
+&lt;br&gt;
+
+**Do firms truthfully disclose their commitments to Diversity, Equity, and Inclusion (DEI) in their financial statements?**
+
+- Are there market implications for talking more about diversity than is reflected in underlying actions?
+
+- We focus on diversity in this paper given:
+
+  - Prior literature.
+  - Recent investor attention and public commentary.
+  - Data availability.
+  
+---
+
+# .center.pull[Motivation: Diversity "Policies" and "Targets"]
+
+- Disconnect between share of firms with policies and those with actual concrete targets.
+  - What do we draw from this?
+  
+&lt;img src="figures/policy_v_target.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# .center.pull[Motivation: Legal and Regulatory Action]
+
+- SEC very interested in standardizing ESG disclosures.
+
+- Around 40 lawsuits filed since 2020 related to diversity washing.
+
+- Many of these suits have centered on public commitments in financial documents.
+
+
+&lt;img src="figures/diversity_headlines.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# .center.pull[Diversity Washing]
+
+- **DEI disclosures are relatively new.**
+
+  - Little to no regulation or standardization.
+  - Impossible or costly verification.
+  
+    - **Potential benefits to diversity washing:**
+    
+      - Enhanced reputation among stakeholders.
+      
+      - Capital flow with rise of ESG investing.
+      
+    - **Potential Costs:**
+    
+      - Litigation (has historically been very rare).
+      
+      - Diversity audits (only 8 proposals passed in 2022.)
+
+---
+
+# .center.pull[Our Contribution]
+
+&lt;br&gt;
+** We construct measures of underlying firm-level diversity, which we can compare with discussion of diversity in financial disclosures.**
+
+- **Advantages of our approach**:
+
+  - Allows us to peak "under the hood" at a non-self-disclosed measure of actual diversity.
+  - Breadth: we can measure diversity along cross-section and time-series.
+  
+- **Real-world relevance**:
+
+  - Firms have been accused of diversity washing, but evidence so far consists of anecdotes.
+  - Can provide evidence on the implications of diversity washing for firms and fund flow.
+  
+---
+
+# .center.pull[Data]
+
+&lt;br&gt;
+
+- Sample: **All Firms in Compustat-CRSP File** from **2008 to 2021**.
+
+- Variety of data sources:
+
+  - **Revelio Labs**: Firm-year level diversity measures.
+  
+  - **EDGAR Filings (WRDS SEC Analytics Suits):** Raw text of 10Ks, DEF 14As, 8Ks.
+  
+  - Additional Data Sources: Compustat, CRSP (securities prices and mutual fund holdings), Sustainalytics, Thompson Reuters (13-F holdings and Refinitiv), Goodjobsfirst, Twitter, Corporate Register.
+
+---
+
+# .center.pull[Revelio Labs: Diversity Data]
+
+- Aggregates measures of firm diversity at firm-year level.
+
+    - Compiles data from hundreds of millions of online public profiles and resumes.
+    
+    - Prediction-based algorithm to assign gender and race/ethnicity from name and location.
+    
+        - Trained on Census and voter registration data. 
+        
+- Caveats:
+
+  - Data is imperfect. But
+      - Firm has done analyses to validate its accuracy. 
+      - Sample may be biased towards professionals. 
+      
+  - 90% correlation for females when compared to sample of disclosing firms (Liang et al. 2022, WP)
+  
+---
+
+# .center.pull[DEI Related Disclosures]
+
+- Difficult to observe all possible disclosure channels.
+
+- Focus on EDGAR documents:
+
+  - **Coverage:** All publicly traded firms have to file.
+  
+  - **Increasingly essential avenue** for firm communication about ESG-related activities and commitments.
+  
+  - **Firms have recently come under scrutiny for false or misleading commitments** to diversity in their financial disclosures.
+  
+  - **SEC currently has proposals for ESG disclosures under review**.
+  
+  - **Representative** of external stance on DEI.
+  
+---
+
+# .center.pull[Dictionary Based Approach]
+
+- Build upon dictionary-based approaches commonly used in finance.
+
+- **Steps:**
+
+  - Assemble a dictionary of key DEI-related words from online DEI dictionaries.
+      - e.g. "Equal Pay", "Affirmative Action", "Sexual Orientation"
+      
+  - Remove terms that have alternative meanings in financial documents (e.g., equity)
+      - replace with bigrams where possible (e.g. "pay equity")
+      
+  - Count DEI terms across SEC filings.
+  
+- **Summary:** Measure the extent of DEI discussions in financial statements. 
+
+---
+
+# .center.pull[How Do Firms Talk about DEI (in progress)]
+
+&lt;br&gt;
+
+- Extract the sentences with DEI words.
+
+- Use `word2vec` and `kmeans` to identify topics.
+
+- Have RAs label topics and classify them into categories:
+
+    - Community engagement, governance, employee characteristics, legal concerns, etc.
+    
+- Measure the tone of the sentences with DEI words and correlate it with our washing measure. 
+    
+---
+
+# .center.pull[Underlying Diversity vs. DEI Discussions]
+
+&lt;img src="index_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+---
+ 
+# .center.pull[DEI Disclosures and Diversity]
+    
+- We document a **positive but weak** relationship in aggregate between DEI disclosures and underlying diversity.
+    - Consistent with prior work.
+    - Results slightly stronger without FEs, but remain economically very small 
+    - Incremental `\(R^2\)` only on order of 0.1-0.7%.
+
+&lt;img src="figures/dei_diversity_reg.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+ 
+# .center.pull[DEI Disclosures and Diversity]
+
+&lt;img src="index_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+ 
+# .center.pull[Empirical Measure of Diversity Washing]
+&lt;br&gt; 
+&lt;div align="center"&gt;
+ 1) **Diversity Washing Level** = `\(\eta_{DEI}\)` - `\(\eta_{Diversity}\)`
+ 
+ 2) **Diversity Washers** = `\(\mathbb{1}(\eta_{DEI} &gt; \eta_{Diversity})\)`
+ 
+&lt;div align="left"&gt;
+
+&lt;br&gt; 
+- Disparity between DEI word count and underlying diversity.
+
+    - Assumption being that these measures should be correlated.
+    
+- Similar rationale to prior studies using **abnormal textual measures** (e.g. Teoh et al. 2014, Bushee et al. 2017)
+
+
+---
+
+# .center.pull[Descriptive Analysis]
+
+&lt;div align="center"&gt;
+ 1) **Diversity Washing Level** = `\(\eta_{DEI}\)` - `\(\eta_{Diversity}\)`
+ 
+ 2) **Diversity Washers** = `\(\mathbb{1}(\eta_{DEI} &gt; \eta_{Diversity})\)`
+ 
+&lt;div align="left"&gt;
+
+&lt;img src="figures/descriptives.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# .center.pull[Descriptive Analysis]
+&lt;div align="center"&gt;
+
+**Diversity Washers are conditionally larger**
+
+&lt;img src="figures/descriptives_size.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Descriptive Analysis]
+&lt;div align="center"&gt;
+
+**Diversity Washers are conditionally less profitable and have lower growth**
+
+&lt;img src="figures/descriptives_growth.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Descriptive Analysis]
+&lt;div align="center"&gt;
+
+**Diversity Washers have conditionally lower returns and higher volatility**
+
+&lt;img src="figures/descriptives_returns.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Diversity Washing and Employment Violations]
+&lt;div align="center"&gt;
+
+**Diversity Washers have more employment and discrimination-related penalties (number and dollar amount)**
+
+&lt;img src="figures/penalties.png" width="62%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Diversity Washing and Questionable ESG Policies]
+&lt;div align="center"&gt;
+
+**Diversity Washers have more *questionable ESG policies***:
+  
+  **Lack quantifiable targets**
+  
+&lt;img src="figures/questionable_policy.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Diversity Washing and ESG Ratings]
+
+- ESG rating agencies rely heavily on firm disclosures.
+
+    - "... a default value of 0 is assigned... when no relevant data is found in the public disclosure of companies." - Refinitiv Methodology guide.
+    
+- Diversity washers have *2-13% higher ESG ratings* than other firms. 
+
+&lt;img src="figures/esg_ratings.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Diversity Washing and ESG Ownership]
+
+- Firms might use opportunistic DEI disclosures to attract investors.
+
+    - Socially-responsible capital could be misallocated as a result.
+    
+    - The SEC is very concerned with this question.
+    
+- Diversity washers have approximately *10% Higher ESG fund ownership* than could be expected. 
+
+&lt;img src="figures/ownership.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+# .center.pull[Diversity Washing as an Aspiration]
+
+- Could DEI disclsoure channel signal aspiration to become more diverse?
+
+  - **No evidence of future increases in diversity hiring**.
+  - **Similar results focusing on senior employees**.
+
+
+&lt;img src="figures/future_growth.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# .center.pull[Conclusion]
+
+&lt;br&gt; 
+
+- We provide large-sample evidence consistent with:
+
+    - Weak correlation between discussion of DEI and actual underlying diversity.
+    
+    - Aggregate correlation masks large underlying disparity between disclosed commitments to DEI and hiring practices.
+    
+    - This disparity is correlated with ESG ratings and fund flows, similar to worries about misallocated capital with unverifiable disclosures.
+  
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"ratio": "16:9",
+"font-size": 15,
+"highlightLines": true,
+"countIncrementalSlides": false,
+"extra_dependencies": "xcolor"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
